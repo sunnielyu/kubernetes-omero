@@ -24,8 +24,12 @@ data:
 
     {{- if .Values.redis.enabled }}
     config set -- omero.web.session_engine django.contrib.sessions.backends.cache
+    {{- end }}
+    
+    {{- if .Values.redis.auth.password }}
     config set -- omero.web.caches '{ "default": { "BACKEND": "django_redis.cache.RedisCache", "LOCATION": "redis://:{{ .Values.redis.auth.password }}@{{ .Release.Name }}-redis-master:6379/0" } }'
-
+    {{- else }}
+    config set -- omero.web.caches ‘{ “default”: { “BACKEND”: “django_redis.cache.RedisCache”, “LOCATION”: “redis://{{ .Release.Name }}-redis-master:6379/0” } }’
     {{- end }}
 
     {{- range $key, $value := .Values.config.set }}
