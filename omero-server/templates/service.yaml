@@ -13,6 +13,10 @@ spec:
   loadBalancerIP: {{ .Values.service.loadBalancerIP }}
   {{- end}}
   ports:
+    - port: {{ .Values.service.noSSL }}
+      targetPort: ice-router
+      protocol: TCP
+      name: ice-router
     - port: {{ .Values.service.port }}
       targetPort: ice-srouter
       protocol: TCP
