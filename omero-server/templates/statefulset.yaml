@@ -51,9 +51,9 @@ spec:
             # - name: ice-location
             #   containerPort: 4061
             #   protocol: TCP
-            # - name: ice-router
-            #   containerPort: 4063
-            #   protocol: TCP
+            - name: ice-router
+              containerPort: 4063
+              protocol: TCP
             - name: ice-srouter
               containerPort: 4064
               protocol: TCP
